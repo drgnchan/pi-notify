@@ -1,0 +1,36 @@
+{
+  "name": "pi-notify",
+  "version": "0.1.0",
+  "description": "Smart mobile and desktop notifications for Pi, with Telegram support.",
+  "type": "module",
+  "license": "MIT",
+  "author": "drgnchan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drgnchan/pi-notify.git"
+  },
+  "homepage": "https://github.com/drgnchan/pi-notify#readme",
+  "bugs": {
+    "url": "https://github.com/drgnchan/pi-notify/issues"
+  },
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "notification",
+    "telegram",
+    "developer-tools"
+  ],
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}

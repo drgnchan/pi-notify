@@ -1,0 +1,7 @@
+node_modules/
+.pi/
+assistant-notify.json
+.env
+.env.*
+*.log
+.DS_Store
