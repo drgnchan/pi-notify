@@ -386,19 +386,7 @@ export default function (pi: ExtensionAPI) {
     }
   }
 
-  function updateStatus(ctx: ExtensionContext): void {
-    if (!ctx.hasUI) return;
-    ctx.ui.setStatus(
-      "assistant-notify",
-      cfg.enabled ? `通知: 开 (${cfg.mode})` : "通知: 关",
-    );
-  }
-
   // ---------- 事件 ----------
-
-  pi.on("session_start", async (_event, ctx) => {
-    updateStatus(ctx);
-  });
 
   pi.on("before_agent_start", async () => {
     runStartedAt = Date.now();
@@ -441,7 +429,6 @@ export default function (pi: ExtensionAPI) {
 
     const body = notificationBody(lastAssistantText, "Pi 已生成回复。");
     await notifyChannels("Pi 已完成", body, notificationMeta("done", ctx));
-    updateStatus(ctx);
   });
 
   // ---------- 命令 ----------
@@ -459,7 +446,6 @@ export default function (pi: ExtensionAPI) {
           `通知: ${on(cfg.enabled)} · 模式: ${cfg.mode}\n规则: 最短 ${cfg.minDurationSeconds}s · 隐私 ${cfg.privacy} · 重试 ${on(cfg.retry)}\n通道: desktop:${on(cfg.desktop)} · bell:${on(cfg.bell)} · osc:${on(cfg.osc)} · webhook:${on(cfg.webhook)}${cfg.webhook ? ` (${cfg.webhookType})` : ""}`,
           "info",
         );
-        updateStatus(ctx);
       };
 
       if (!first) {
@@ -608,7 +594,6 @@ export default function (pi: ExtensionAPI) {
           cfg.webhook = true;
           saveConfig(cfg);
           ctx.ui.notify(`webhook 已配置 (${type}) 并开启，可用 /notify webhook test 验证`, "info");
-          updateStatus(ctx);
           return;
         }
         default: {
